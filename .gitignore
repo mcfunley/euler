@@ -1,6 +1,11 @@
-primes
-primesdb
+primes.txt
+primes.dat
+primesdb-gen
+*dSYM*
 *hi
 *o
 *prof
 .svn
+bin
+primes
+primesdb
