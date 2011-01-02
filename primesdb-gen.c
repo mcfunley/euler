@@ -66,7 +66,7 @@ int main() {
 
             int p = head->primes[j];
             entries[p].prev = prev;
-            entires[p].next = -1;
+            entries[p].next = -1;
             
             // set the next link on the previous prime number 
             if(prev > 0) {

@@ -5,10 +5,11 @@ objdir=obj
 
 
 problems = \
-  p0060
+  p0060 \
+  p0061
 
 
-all: dirs primes.dat compile
+all: dirs primes.dat print-primes compile
 
 
 dirs:
@@ -23,10 +24,16 @@ clean:
 	rm -rf primes
 	rm -rf primesdb
 	rm -rf primes.dat
+	rm -rf print-primes
+	rm -rf primesdb-gen
 
 
-$(objdir)/primesdb.o:
-	$(CC) $(CFLAGS) -c primesdb.c -o $(objdir)/$$l.o
+print-primes: $(objdir)/primesdb.o print-primes.c
+	$(CC) $(CFLAGS) print-primes.c $(objdir)/primesdb.o -o print-primes
+
+
+$(objdir)/primesdb.o: primesdb.c primesdb.h
+	$(CC) $(CFLAGS) -c primesdb.c -o $(objdir)/primesdb.o
 
 
 primes.dat: primes.txt primesdb-gen 
