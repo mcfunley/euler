@@ -5,8 +5,7 @@ objdir=obj
 
 
 problems = \
-  p0060 \
-  p0061
+  p0060 
 
 
 all: dirs primes.dat print-primes compile
