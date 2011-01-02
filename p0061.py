@@ -32,14 +32,6 @@ set.
 from itertools import count
 
 
-def cyclic(xs):
-    ss = map(str, xs)
-    for p, q in zip(ss, ss[1:]):
-        if p[-2:] != q[:2]:
-            return 0
-    return 1
-
-
 def nums(f):
     ret = []
     for n in count(0):
@@ -60,7 +52,6 @@ octagons = nums(lambda n: n * (3 * n - 2))
 all_lists = [triangles, squares, pentagons, hexagons, heptagons, octagons]
 
 
-
 def get_all_nums():
     all_nums = []
     for i, l in zip(count(0), all_lists):
@@ -73,24 +64,14 @@ def pre(n): return str(n)[:2]
 def suf(n): return str(n)[-2:]
 
 
-def can_cycle(n, m):
-    return pre(n) == suf(m) or pre(m) == suf(n)
- 
-
 num_to_poly = {}
 for i, n in get_all_nums():
     num_to_poly.setdefault(n, []).append(i)
         
 
-def get_polygons(n):
-    return num_to_poly[n]
-
-
 prefixes = {}
-suffixes = {}
 for _, n in get_all_nums():
     prefixes.setdefault(pre(n), []).append(n)
-    suffixes.setdefault(suf(n), []).append(n)
 
 
 def find_set(nums, polys):
