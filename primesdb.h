@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+#ifndef PRIMESDB_H
+#define PRIMESDB_H
+
 
 typedef struct {
     int next;
@@ -26,3 +29,6 @@ void prime_iter_init(prime_iter* it, primesdb* db);
 int prime_iter_next(prime_iter* it);
 
 int primesdb_is_prime(primesdb* db, int i);
+
+
+#endif

@@ -4,11 +4,17 @@ outdir=bin
 objdir=obj
 
 
+libs = \
+  vector \
+  factorize \
+  totient
+
 problems = \
-  p0060 
+  p0060 \
+  p0069 \
+  p0070
 
-
-all: dirs primes.dat print-primes compile
+all: dirs primes.dat print-primes compile-libs compile
 
 
 dirs:
@@ -54,6 +60,14 @@ primesdb-gen: $(objdir)/primesdb.o primesdb-gen.c
 
 primesdb-run:
 	./primesdb-gen
+
+
+compile-libs:
+	@echo "Compiling libraries"
+	for l in $(libs) ; do \
+		$(CC) -c $(CFLAGS) $$l.c -o $(objdir)/$$l.o ; \
+	done
+
 
 compile:
 	@echo "Compiling sources"
