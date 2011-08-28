@@ -7,16 +7,7 @@
 #include "primesdb.h"
 
 
-prime_entry* primesdb_entries(primesdb* db) {
-    return (prime_entry*)(db + sizeof(primesdb));
-}
-
-
-void primesdb_free(primesdb* db) {
-    int fd = db->filedesc;
-    munmap((void*)db, db->sz);
-    close(fd);
-}
+primesdb* g_primes = 0;
 
 
 primesdb* primesdb_init() {
@@ -46,23 +37,47 @@ primesdb* primesdb_init() {
 
 
 
-void prime_iter_init(prime_iter* it, primesdb* db) {
+inline primesdb* _primesdb() {
+    if(!g_primes) {
+        g_primes = primesdb_init();
+    }
+    return g_primes;
+}
+
+inline prime_entry* primesdb_entries() {
+    return (prime_entry*)(_primesdb() + sizeof(primesdb));
+}
+
+
+void primesdb_free() {
+    if(g_primes) {
+        int fd = g_primes->filedesc;
+        munmap((void*)g_primes, g_primes->sz);
+        close(fd);
+        g_primes = 0;
+    }
+}
+
+
+
+void prime_iter_init(prime_iter* it) {
     it->p = 2;
-    it->db = db;
+    it->db = _primesdb();
 }
 
 
 int prime_iter_next(prime_iter* it) {
     int p = it->p;
-    it->p = primesdb_entries(it->db)[p].next;
+    it->p = primesdb_entries()[p].next;
     return p;
 }
 
 
-int primesdb_is_prime(primesdb* db, int i) {
+int primesdb_is_prime(int i) {
+    primesdb* db = _primesdb();
     if(i > db->max) {
         return 0;
     }
-    prime_entry e = primesdb_entries(db)[i];
+    prime_entry e = primesdb_entries()[i];
     return (e.next != 0 && e.prev != 0) ? 1 : 0;
 }

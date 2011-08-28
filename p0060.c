@@ -13,11 +13,11 @@ Find the lowest sum for a set of five primes for which any two primes
 concatenate to produce another prime.
  */
 
-int cat_test(primesdb* db, int p, int q) {
+int cat_test(int p, int q) {
     char s1[255], s2[255];
     snprintf(s1, 255, "%d%d", p, q);
     snprintf(s2, 255, "%d%d", q, p);
-    if(primesdb_is_prime(db, atoi(s1)) && primesdb_is_prime(db, atoi(s2))) {
+    if(primesdb_is_prime(atoi(s1)) && primesdb_is_prime(atoi(s2))) {
         return 1;
     }
     return 0;
@@ -25,15 +25,13 @@ int cat_test(primesdb* db, int p, int q) {
 
 
 int main() {
-    primesdb* db = primesdb_init();
-
     int pairs[1000][150];
     prime_iter f, p;
-    prime_iter_init(&f, db);
+    prime_iter_init(&f);
     
     int i = 0;
     for(; i < 1000; i++) {
-        prime_iter_init(&p, db);
+        prime_iter_init(&p);
 
         pairs[i][0] = prime_iter_next(&f);
         
@@ -42,7 +40,7 @@ int main() {
         
         int c = 1;
         while(c < 150 && (j = prime_iter_next(&p)) < 50000) {
-            if(cat_test(db, j, pairs[i][0])) {
+            if(cat_test(j, pairs[i][0])) {
                 pairs[i][c] = j;
                 c++;
             }
@@ -63,22 +61,22 @@ int main() {
             for(; l < 150; l++) {
                 int pl = pairs[i][l];
                 if(pl == 0) break;
-                if(!cat_test(db, pk, pl)) continue;
+                if(!cat_test(pk, pl)) continue;
 
                 int m = l+1;
                 for(; m < 150; m++) {
                     int pm = pairs[i][m];
                     if(pm == 0) break;
-                    if(!cat_test(db, pm, pk)) continue;
-                    if(!cat_test(db, pm, pl)) continue;
+                    if(!cat_test(pm, pk)) continue;
+                    if(!cat_test(pm, pl)) continue;
 
                     int n = m+1;
                     for(; n < 150; n++) {
                         int pn = pairs[i][n];
                         if(pairs[i][n] == 0) break;
-                        if(!cat_test(db, pn, pk)) continue;
-                        if(!cat_test(db, pn, pl)) continue;
-                        if(!cat_test(db, pn, pm)) continue;
+                        if(!cat_test(pn, pk)) continue;
+                        if(!cat_test(pn, pl)) continue;
+                        if(!cat_test(pn, pm)) continue;
 
                         int s = p0 + pk + pl + pm + pn;
                         printf("%d: %d %d %d %d %d\n", s, p0, pk, pl, pm, pn);
@@ -89,6 +87,5 @@ int main() {
         }
     }
 
-    primesdb_free(db);
     return 0;
 }

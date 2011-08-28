@@ -3,16 +3,19 @@
 #include "vector.h"
 #include "primesdb.h"
 
+void prime_factor_result_free(prime_factor_result* r) {
+    free(r->pfs);
+    free(r);
+}
+
 
 ivector* get_prime_factor_vector(int n) {
     ivector* factors = ivector_init();
-    primesdb* db = primesdb_init();
     prime_iter it;
-    prime_iter_init(&it, db);
+    prime_iter_init(&it);
 
     int p = prime_iter_next(&it);
-    int end = n / 2 + 1;
-    while(p <= end) {
+    while(p <= n) {
         if(n % p == 0) {
             n /= p;
             ivector_append(factors, p);
@@ -21,19 +24,9 @@ ivector* get_prime_factor_vector(int n) {
         }
     }
 
-    if(ivector_count(factors) == 0) {
-        ivector_append(factors, n);
-    }
-
-    primesdb_free(db);
     return factors;
 }
 
-
-void prime_factor_result_free(prime_factor_result* r) {
-    free(r->pfs);
-    free(r);
-}
 
 
 prime_factor_result* prime_factor_result_init(ivector* primes) {
@@ -88,7 +81,7 @@ prime_factor_result* prime_factors(int n) {
             last = p;
         }
     }
-     
+    
     r->count = i+1;
 
     ivector_free(primes);
@@ -96,3 +89,4 @@ prime_factor_result* prime_factors(int n) {
 
     return r;
 }
+

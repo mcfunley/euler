@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -O3 -Wall
+CFLAGS=-g -pg -O3 -Wall
 outdir=bin
 objdir=obj
 
@@ -12,6 +12,7 @@ libs = \
 problems = \
   p0060 \
   p0069 \
+  totient_table \
   p0070
 
 all: dirs primes.dat print-primes compile-libs compile

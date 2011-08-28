@@ -21,14 +21,12 @@ typedef struct {
     primesdb* db;
 } prime_iter;
 
+void primesdb_free(void);
 
-primesdb* primesdb_init(void);
-void primesdb_free(primesdb* db);
-
-void prime_iter_init(prime_iter* it, primesdb* db);
+void prime_iter_init(prime_iter* it);
 int prime_iter_next(prime_iter* it);
 
-int primesdb_is_prime(primesdb* db, int i);
+int primesdb_is_prime(int i);
 
 
 #endif
