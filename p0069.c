@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "ncurses.h"
 #include "euler.h"
 
 

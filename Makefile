@@ -7,13 +7,16 @@ objdir=obj
 libs = \
   vector \
   factorize \
-  totient
+  totient \
+  permutation
 
 problems = \
   p0060 \
   p0069 \
   totient_table \
-  p0070
+  p0070 \
+  sortchars_test \
+  is_perm_test
 
 all: dirs primes.dat print-primes compile-libs compile
 
