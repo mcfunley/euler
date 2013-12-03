@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -pg -O3 -Wall
+CFLAGS=-g -pg -O3 -Wall -std=c99
 outdir=bin
 objdir=obj
 
@@ -16,7 +16,8 @@ problems = \
   totient_table \
   p0070 \
   sortchars_test \
-  is_perm_test
+  is_perm_test \
+  p0072
 
 all: dirs primes.dat print-primes compile-libs compile
 
