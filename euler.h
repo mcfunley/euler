@@ -10,7 +10,8 @@
 #include "primesdb.h"
 #include "factorize.h"
 #include "totient.h"
-
+#include "divtricks.h"
+#include "gcd.h"
 
 int is_perm(int i, int j);
 void sortchars(char* c);

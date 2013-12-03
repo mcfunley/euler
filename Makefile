@@ -8,7 +8,9 @@ libs = \
   vector \
   factorize \
   totient \
-  permutation
+  permutation \
+  divtricks \
+  gcd
 
 problems = \
   p0060 \
@@ -17,7 +19,8 @@ problems = \
   p0070 \
   sortchars_test \
   is_perm_test \
-  p0072
+  p0072 \
+  p0073
 
 all: dirs primes.dat print-primes compile-libs compile
 
