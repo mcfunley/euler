@@ -12,3 +12,4 @@ primesdb
 print-primes
 *~
 gmon.out
+*pyc
