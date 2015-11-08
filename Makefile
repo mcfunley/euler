@@ -20,9 +20,10 @@ problems = \
   sortchars_test \
   is_perm_test \
   p0072 \
-  p0073
+  p0073 \
+  p0086
 
-all: dirs primes.dat print-primes compile-libs compile
+all: dirs primes.dat print-primes compile-libs compile-libbloom compile
 
 
 dirs:
@@ -70,16 +71,19 @@ primesdb-run:
 	./primesdb-gen
 
 
+compile-libbloom:
+	pushd libbloom && make && popd
+
 compile-libs:
 	@echo "Compiling libraries"
 	for l in $(libs) ; do \
-		$(CC) -c $(CFLAGS) $$l.c -o $(objdir)/$$l.o ; \
+		$(CC) -c $(CFLAGS) $$l.c -o $(objdir)/$$l.o; \
 	done
 
 
 compile:
 	@echo "Compiling sources"
 	for p in $(problems) ; do \
-		$(CC) $(CFLAGS) $$p.c $(objdir)/*.o -o $(outdir)/$$p ; \
+		$(CC) $(CFLAGS) $$p.c $(objdir)/*.o libbloom/build/bloom.o libbloom/build/murmurhash2.o -o $(outdir)/$$p ; \
 	done
 

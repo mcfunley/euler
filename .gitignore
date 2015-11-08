@@ -13,3 +13,4 @@ print-primes
 *~
 gmon.out
 *pyc
+libbloom/build
