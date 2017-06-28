@@ -25,3 +25,21 @@ def is_perfect_square(n):
         return t*t == n
 
     return False
+
+def positive_integral_quadratic_solution(a, b, c):
+    x = b*b - 4*a*c
+    if not is_perfect_square(x):
+        return None
+
+    den = 2*a
+    num1 = (0-b) + sqrt(x)
+    res1 = num1 / den
+    if res1 > 0 and num1 % den == 0:
+        return int(res1)
+
+    num2 = (0-b) - sqrt(x)
+    res2 = num2 / den
+    if res2 > 0 and num2 % den == 0:
+        return int(res2)
+
+    return None
