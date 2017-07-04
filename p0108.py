@@ -2,8 +2,6 @@
 import numpy as np
 from sympy import factorint
 from sympy.ntheory.generate import prime
-from itertools import count
-import sys
 
 # 1/x + 1/y = 1/n
 # y/xy + x/xy = 1/n
