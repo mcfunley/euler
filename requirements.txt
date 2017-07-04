@@ -1,2 +1,4 @@
+mpmath==0.19
 numpy==1.13.0
 scipy==0.19.1
+sympy==1.0
