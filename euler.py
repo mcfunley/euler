@@ -1,11 +1,11 @@
 from math import sqrt
 
 def digits(n):
-    def d(n):
-        while n:
-            yield n % 10
-            n //= 10
-    return reversed(list(d(n)))
+    result = []
+    while n:
+        result.append(n % 10)
+        n //= 10
+    return list(reversed(result))
 
 
 def gcd(a, b):
