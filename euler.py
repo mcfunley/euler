@@ -1,5 +1,13 @@
 from math import sqrt
 
+def digits(n):
+    def d(n):
+        while n:
+            yield n % 10
+            n //= 10
+    return reversed(list(d(n)))
+
+
 def gcd(a, b):
     while b != a:
         if a > b:
