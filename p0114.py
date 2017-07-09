@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from itertools import combinations, product
 from functools import lru_cache
 
 # correct but slow solution
