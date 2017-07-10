@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 from sympy import isprime
-from itertools import permutations, combinations
-from euler import from_digits, digits, partitions
-from functools import lru_cache
+from itertools import permutations
+from euler import from_digits, partitions
 
 def generate_numbers(ds):
     p = 0
