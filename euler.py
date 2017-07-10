@@ -8,6 +8,28 @@ def digits(n):
     return list(reversed(result))
 
 
+def from_digits(ds):
+    return sum(n*10**i for i, n in enumerate(reversed(ds)))
+
+
+def partitions(xs):
+    "Generates all in-order partitions of a list xs"
+    yield [xs]
+
+    if len(xs) == 1:
+        return
+
+    for i in range(1, len(xs)):
+        yield [xs[:i], xs[i:]]
+
+        first = True
+        for p in partitions(xs[i:]):
+            if first:
+                first = False
+                continue
+            yield [xs[:i]] + p
+
+
 def gcd(a, b):
     while b != a:
         if a > b:
